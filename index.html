@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>quant.js</title>
+  <script src="https://unpkg.com/lodash@4.17.20"></script>
+  <style>
+    body {
+      overflow: hidden;
+    }
+
+
+    #welcome {
+      width: 100vw;
+      height: 10vh;
+      padding: 5vh;
+      text-align: center;
+      font-family: 'CMU Sans Serif';
+      vertical-align: middle;
+      padding: 0 auto;
+    }
+
+    #site-title {
+      width: 75vw;
+      text-align: center;
+      font-family: 'CMU Sans Serif';
+      vertical-align: middle;
+      padding-top: 50px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #container {
+      margin: 0 auto;
+    }
+
+    #footnote {
+      width: 100vw;
+      text-align: center;
+      font-family: 'CMU Sans Serif';
+      vertical-align: middle;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      font-size: 20px;
+
+    }
+
+    #input-area {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+
+    #main-stage {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+
+    table {
+      font-family: 'CMU Sans Serif'
+    }
+
+    .noselect {
+      user-select: none;
+      -webkit-user-select: none;
+      color: gray;
+    }
+  </style>
+<script defer src="main.js"></script></head>
+
+<body>
+  <div id="input-area" style="position:fixed;width: 100vw;height: 100vh;">
+    <h1 id="welcome">Please input an edgelist for a graph...</h1>
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <textarea class="form-control" id="edge-list" style="resize: none; height: 70vh;"
+          placeholder="Each line should contain two integers indicating an edge.&#10;Example:&#10;0 1&#10;1 2&#10;2 3&#10;3 4"></textarea>
+        <div class="row" style="padding: 40px;">
+          <div class="col-4"><button class="form-control" id="btn-rand" style="left:0">surprise me</button></div>
+          <div class="col-4"><input class="form-control" id="qaoa-p" placeholder="input QAOA p"></div>
+          <div class="col-4"><button class="form-control" id="btn-conf" style="right:0">confirm</button></div>
+        </div>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+
+  <div id="main-stage">
+    <div id="container" style="display: flex;position: relative;top:0;">
+      <div id="fabric-wrapper" style="width:75%;">
+        <h1 id="site-title"> Visualizer for Maxcut-QAOA </h1>
+        <canvas id="c"></canvas>
+      </div>
+      <div id="right-panel" style="width:25%;position: relative;left:0;">
+        <div id="chart-container"><canvas id="chart"></canvas></div>
+        <table style="position: relative;top: 10px;width: 100%">
+          <tr>
+            <td class="noselect" style="text-align: left;">Selected Cut</td>
+            <td id="sel-cut" style="text-align: right;"></td>
+          </tr>
+          <tr>
+            <td class="noselect" style="text-align: left;">Expected Cut</td>
+            <td id="exp-cut" style="text-align: right;"></td>
+          </tr>
+        </table>
+        <div id="cy" style="width:100%;"></div>
+      </div>
+    </div>
+    <span id="footnote" class="noselect">scroll up/down to go through the circuit, and click a bar to see its
+      corresponding cut.</span>
+  </div>
+</body>
+
+</html>
